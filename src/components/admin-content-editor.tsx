@@ -7,6 +7,7 @@ import { RichTextEditor } from "@/components/rich-text-editor";
 
 type Article = { id?:number; title:string; slug:string; category:string; summary:string; image:string; body:string; status:string; href?:string; mapName:string; mapAddress:string; mapUrl:string; mapEmbedUrl:string; lockedSlug?:boolean };
 const taxonomyGroups=[
+  {key:"benefits",label:"혜택",items:[["notice","공지사항"],["event","이벤트"],["service","서비스"]]},
   {key:"ho-chi-minh",label:"호치민",items:[["accommodation","숙소 & 풀빌라"],["karaoke","가라오케"],["club","클럽"],["bar","바 & 주점"],["salon","이발소 & 미용실"],["massage","마사지"],["golf","골프"],["sights","여행지"],["restaurant","맛집"]]},
   {key:"da-nang",label:"다낭",items:[["danangroom","숙소 & 풀빌라"],["danangkaraoke","가라오케"],["danangclub","클럽"],["danangbar","바 & 주점"],["danangsalon","이발소 & 미용실"],["danangmassage","마사지"],["danangfood","맛집"]]},
   {key:"nha-trang",label:"나트랑",items:[["nhatrangroom","숙소 & 풀빌라"],["nhatrangktv","가라오케"],["nhatrangclub","클럽"],["nhatrangbar","바 & 주점"],["nhatrangsalon","이발소 & 미용실"],["nhatrangmassage","마사지"],["nhatranggolf","골프"],["nhatrangtravel","여행지"],["nhatrangfood","맛집"]]},

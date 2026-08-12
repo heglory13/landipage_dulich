@@ -4,14 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
-import { BarChart3, ChevronLeft, FileText, Home, ImageIcon, Inbox, KeyRound, LogOut, Menu, Settings, Users, X } from "lucide-react";
+import { BarChart3, ChevronLeft, FileText, Gift, Home, Inbox, KeyRound, LogOut, Menu, Settings, Users, X } from "lucide-react";
 
 const navItems = [
   { label: "대시보드", href: "/admin", icon: BarChart3 },
   { label: "콘텐츠", href: "/admin/content", icon: FileText },
+  { label: "혜택 관리", href: "/admin/benefits", icon: Gift },
   { label: "회원", href: "/admin/users", icon: Users },
   { label: "문의", href: "/admin/inquiries", icon: Inbox },
-  { label: "이미지 관리", href: "/admin/media", icon: ImageIcon },
   { label: "웹사이트 정보", href: "/admin/settings", icon: Settings },
   { label: "비밀번호 변경", href: "/admin/change-password", icon: KeyRound },
 ] as const;

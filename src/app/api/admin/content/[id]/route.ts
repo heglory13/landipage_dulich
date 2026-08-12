@@ -18,10 +18,10 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
   payload.title = input.title; payload.summary = input.summary; payload.description = input.summary;
   payload.cmsMap = { name: input.mapName, address: input.mapAddress, url: input.mapUrl, embedUrl: input.mapEmbedUrl };
   if (input.image) payload.imageUrl = input.image;
-  const managed = current.kind === "cms_article";
-  const result = database.prepare("UPDATE content_items SET source_key=?,slug=?,title=?,category=?,href=?,image=?,summary=?,payload=?,status=?,updated_at=CURRENT_TIMESTAMP WHERE id=?").run(managed ? `cms:${input.slug}` : current.source_key, managed ? input.slug : current.slug, input.title, input.category || null, managed ? `/article/${input.slug}` : current.href, input.image || null, input.summary || null, JSON.stringify(managed ? { body: safeBody, cmsMap: payload.cmsMap } : payload), input.status, id);
+  const managed = current.kind === "cms_article"||current.source_key.startsWith("cms:");const benefits=new Set(["notice","event","service"]);const managedKind=benefits.has(input.category)?input.category:"cms_article";const managedHref=benefits.has(managedKind)?`/${managedKind}/${input.slug}`:`/article/${input.slug}`;
+  const result = database.prepare("UPDATE content_items SET source_key=?,kind=?,slug=?,title=?,category=?,href=?,image=?,summary=?,payload=?,status=?,updated_at=CURRENT_TIMESTAMP WHERE id=?").run(managed ? `cms:${managedKind}:${input.slug}` : current.source_key,managed?managedKind:current.kind, managed ? input.slug : current.slug, input.title, input.category || null, managed ? managedHref : current.href, input.image || null, input.summary || null, JSON.stringify(managed ? { body: safeBody, cmsMap: payload.cmsMap } : payload), input.status, id);
   if (!result.changes) return Response.json({ error: "게시물을 찾을 수 없습니다." }, { status: 404 });
-  return Response.json({ ok: true, href: `/article/${input.slug}` });
+  return Response.json({ ok: true, href: managedHref });
 }
 export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
   if (!(await authorized(request))) return Response.json({ error: "권한이 없습니다." }, { status: 403 });

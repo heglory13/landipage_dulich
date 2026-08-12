@@ -3,6 +3,7 @@ import { ArrowUpRight, CalendarDays, Megaphone, Sparkles } from "lucide-react";
 import { noticePosts } from "@/data/notice-posts";
 import { eventPosts } from "@/data/event-posts";
 import { servicePosts } from "@/data/service-posts";
+import { database } from "@/lib/database";
 
 type BenefitKind = "notice" | "event" | "service";
 
@@ -92,9 +93,12 @@ export function BenefitPage({
   currentPage?: number;
 }) {
   const page = benefitPages[kind];
-  const totalPages = Math.max(1, Math.ceil(page.posts.length / POSTS_PER_PAGE));
+  const cmsRows=database.prepare("SELECT title,slug,image,summary,updated_at FROM content_items WHERE kind=? AND status='published' AND source_key LIKE 'cms:%' ORDER BY updated_at DESC").all(kind) as Array<{title:string;slug:string;image:string|null;summary:string|null;updated_at:string}>;
+  const cmsPosts:BenefitPost[]=cmsRows.map(row=>({title:row.title,category:page.label,date:new Date(row.updated_at).toLocaleDateString("ko-KR"),description:row.summary??"",href:`/${kind}/${row.slug}`,image:row.image??undefined}));
+  const posts=[...cmsPosts,...page.posts.filter(post=>!cmsRows.some(row=>post.href.endsWith(`/${row.slug}`)))];
+  const totalPages = Math.max(1, Math.ceil(posts.length / POSTS_PER_PAGE));
   const safePage = Math.min(Math.max(currentPage, 1), totalPages);
-  const paginatedPosts = page.posts.slice(
+  const paginatedPosts = posts.slice(
     (safePage - 1) * POSTS_PER_PAGE,
     safePage * POSTS_PER_PAGE,
   );
