@@ -1,0 +1,15 @@
+{
+  "name": "호치민 달밤",
+  "short_name": "호치민 달밤",
+  "description": "베트남 자유여행 정보 커뮤니티 No.1",
+  "icons": [
+    {
+      "src": "/seo/favicon.webp",
+      "sizes": "512x512",
+      "type": "image/webp"
+    }
+  ],
+  "theme_color": "#000080",
+  "background_color": "#ebebeb",
+  "display": "standalone"
+}
