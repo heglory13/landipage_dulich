@@ -13,7 +13,15 @@ export const dynamic = "force-dynamic";
 import archivedPosts from "@/data/vietdalbam/posts.json";
 
 const routeCategories = {
+  accommodation: { source: "dalatroom", label: "숙소&풀빌라" },
   karaoke: { source: "dalatktv", label: "가라오케" },
+  club: { source: "dalatclub", label: "클럽" },
+  bar: { source: "dalatbar", label: "바&주점" },
+  salon: { source: "dalatsalon", label: "이발소&미용실" },
+  massage: { source: "dalatmassage", label: "마사지" },
+  golf: { source: "dalatgolf", label: "골프" },
+  travel: { source: "dalattravel", label: "여행지" },
+  restaurant: { source: "dalatfood", label: "맛집" },
 } as const;
 
 type RouteCategory = keyof typeof routeCategories;
@@ -31,7 +39,12 @@ type ArchivePost = { href: string; title: string; imageUrl: string | null; summa
 
 const posts = archivedPosts as ArticlePost[];
 const categoryBanners: Partial<Record<RouteCategory, string[]>> = {
+  accommodation: ["/vietdalbam/upload/48e5ebc917c04ffc91d4f6cfbcc4004b.webp", "/vietdalbam/upload/5b3aadbfaeb644499e9070de0daf54d4.webp"],
   karaoke: ["/vietdalbam/upload/karaoke-korean-banner.webp", "/vietdalbam/upload/karaoke-local-banner.webp"],
+  salon: ["/vietdalbam/upload/salon-banner-1.webp", "/vietdalbam/upload/salon-banner-2.webp"],
+  club: ["/vietdalbam/upload/club-banner-1.webp", "/vietdalbam/upload/club-banner-2.webp"],
+  massage: ["/vietdalbam/upload/massage-banner-1.webp", "/vietdalbam/upload/massage-banner-2.webp"],
+  restaurant: ["/vietdalbam/upload/restaurant-banner-1.webp", "/vietdalbam/upload/restaurant-banner-2.webp"],
 };
 
 function isRouteCategory(category: string): category is RouteCategory {
@@ -149,7 +162,15 @@ function localImage(post: ArticlePost) {
 
 function archiveTitle(category: RouteCategory) {
   const titles: Record<RouteCategory, string> = {
+    accommodation: "Đà Lạt 숙소&풀빌라",
     karaoke: "Đà Lạt 가라오케",
+    club: "Đà Lạt 클럽",
+    bar: "Đà Lạt 바&주점",
+    salon: "Đà Lạt 이발소&미용실",
+    massage: "Đà Lạt 마사지",
+    golf: "Đà Lạt 골프",
+    travel: "Đà Lạt 여행지",
+    restaurant: "Đà Lạt 맛집",
   };
   return titles[category];
 }

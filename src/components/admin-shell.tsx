@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
-import { BarChart3, ChevronLeft, FileText, Home, ImageIcon, Inbox, LogOut, Menu, Settings, Users, X } from "lucide-react";
+import { BarChart3, ChevronLeft, FileText, Home, ImageIcon, Inbox, KeyRound, LogOut, Menu, Settings, Users, X } from "lucide-react";
 
 const navItems = [
   { label: "대시보드", href: "/admin", icon: BarChart3 },
@@ -13,6 +13,7 @@ const navItems = [
   { label: "문의", href: "/admin/inquiries", icon: Inbox },
   { label: "이미지 관리", href: "/admin/media", icon: ImageIcon },
   { label: "웹사이트 정보", href: "/admin/settings", icon: Settings },
+  { label: "비밀번호 변경", href: "/admin/change-password", icon: KeyRound },
 ] as const;
 
 export function AdminShell({ name, email, children }: { name: string; email: string; children: React.ReactNode }) {
@@ -36,7 +37,7 @@ export function AdminShell({ name, email, children }: { name: string; email: str
       <div className="border-b border-white/10 p-4">
         <div className="flex items-center gap-3 rounded-lg bg-white/[.06] p-3">
           <span className="grid size-10 shrink-0 place-items-center rounded-full bg-[#2271b1] font-bold text-white">{name.charAt(0).toUpperCase()}</span>
-          <div className="min-w-0"><p className="truncate text-sm font-semibold text-white">{name}</p><p className="truncate text-xs text-[#a7aaad]">{email}</p></div>
+          <div className="min-w-0"><p className="truncate text-sm font-semibold text-white">{name}</p><p className="truncate text-xs text-[#a7aaad]">{email}</p><Link href="/admin/change-password" onClick={() => setOpen(false)} className="mt-1 inline-flex items-center gap-1 text-xs text-[#72aee6] hover:text-white"><KeyRound className="size-3"/>비밀번호 변경</Link></div>
         </div>
       </div>
       <nav className="flex-1 space-y-1 overflow-y-auto p-3">

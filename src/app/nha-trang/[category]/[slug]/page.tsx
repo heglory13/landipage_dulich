@@ -14,10 +14,15 @@ import archivedCategories from "@/data/vietdalbam/categories.json";
 import archivedPosts from "@/data/vietdalbam/posts.json";
 
 const routeCategories = {
+  accommodation: { source: "nhatrangroom", label: "숙소&풀빌라" },
   karaoke: { source: "nhatrangktv", label: "가라오케" },
   salon: { source: "nhatrangsalon", label: "이발소 & 미용실" },
   massage: { source: "nhatrangmassage", label: "마사지" },
   club: { source: "nhatrangclub", label: "클럽" },
+  bar: { source: "nhatrangbar", label: "바&주점" },
+  golf: { source: "nhatranggolf", label: "골프" },
+  travel: { source: "nhatrangtravel", label: "여행지" },
+  restaurant: { source: "nhatrangfood", label: "맛집" },
 } as const;
 
 type RouteCategory = keyof typeof routeCategories;
@@ -37,10 +42,12 @@ type ArchiveCategory = { slug: string; posts: ArchivePost[] };
 const posts = archivedPosts as ArticlePost[];
 const categories = archivedCategories as ArchiveCategory[];
 const categoryBanners: Partial<Record<RouteCategory, string[]>> = {
+  accommodation: ["/vietdalbam/upload/48e5ebc917c04ffc91d4f6cfbcc4004b.webp", "/vietdalbam/upload/5b3aadbfaeb644499e9070de0daf54d4.webp"],
   karaoke: ["/vietdalbam/upload/karaoke-korean-banner.webp", "/vietdalbam/upload/karaoke-local-banner.webp"],
   salon: ["/vietdalbam/upload/salon-banner-1.webp", "/vietdalbam/upload/salon-banner-2.webp"],
   club: ["/vietdalbam/upload/club-banner-1.webp", "/vietdalbam/upload/club-banner-2.webp"],
   massage: ["/vietdalbam/upload/massage-banner-1.webp", "/vietdalbam/upload/massage-banner-2.webp"],
+  restaurant: ["/vietdalbam/upload/restaurant-banner-1.webp", "/vietdalbam/upload/restaurant-banner-2.webp"],
 };
 
 function isRouteCategory(category: string): category is RouteCategory {
@@ -203,10 +210,15 @@ function localImage(post: ArticlePost) {
 
 function archiveTitle(category: RouteCategory) {
   const titles: Record<RouteCategory, string> = {
+    accommodation: "Nha Trang 숙소&풀빌라",
     karaoke: "Nha Trang 가라오케",
     salon: "Nha Trang 이발소 & 미용실",
     club: "Nha Trang 클럽",
     massage: "Nha Trang 마사지",
+    bar: "Nha Trang 바&주점",
+    golf: "Nha Trang 골프",
+    travel: "Nha Trang 여행지",
+    restaurant: "Nha Trang 맛집",
   };
   return titles[category];
 }

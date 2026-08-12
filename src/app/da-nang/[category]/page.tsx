@@ -161,14 +161,13 @@ export default async function DaNangCategoryPage({
   const { category: rawCategory } = await params;
   if (!isRouteCategory(rawCategory)) notFound();
   const category = routeCategories[rawCategory];
-  const archive = categories.find((item) => item.slug === category.source);
-  if (!archive) notFound();
+  const archive = category.source ? categories.find((item) => item.slug === category.source) : undefined;
 
   const query = await searchParams;
   const filterOptions = categoryFilters[rawCategory];
   const selectedFilter = filterOptions.some(([value]) => value === (query.filter ?? query.type)) ? (query.filter ?? query.type ?? "all") : "all";
   const searchText = query.q ?? "";
-  const allPosts = [...getPublicCmsPosts([category.source]), ...archive.posts];
+  const allPosts = [...getPublicCmsPosts([category.source ?? ""]), ...(archive?.posts ?? [])];
   const filteredPosts = allPosts.filter((post) => {
     const text = postSearchText(post);
     const keyword = searchText.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
@@ -178,7 +177,7 @@ export default async function DaNangCategoryPage({
   const totalPages = Math.max(1, Math.ceil(filteredPosts.length / pageSize));
   const currentPage = Math.min(Math.max(Number(query.page) || 1, 1), totalPages);
   const visiblePosts = filteredPosts.slice((currentPage - 1) * pageSize, currentPage * pageSize);
-  const banners = categoryBanners[rawCategory] ?? allPosts.slice(0, 2).map((post) => localImage(post)).filter((image): image is string => Boolean(image));
+  const banners = categoryBanners[rawCategory] ?? (archive?.posts ?? allPosts).slice(0, 2).map((post) => localImage(post)).filter((image): image is string => Boolean(image));
   const pageHref = (page: number) => {
     const params = new URLSearchParams({ page: String(page) });
     if (searchText) params.set("q", searchText);

@@ -1,5 +1,4 @@
 import { notFound, redirect } from "next/navigation";
-import { canonicalArticleHref } from "@/lib/content-routes";
 
 const listingRoutes: Record<string,string> = {
   accommodation:"/ho-chi-minh/accommodation", karaoke:"/ho-chi-minh/karaoke", club:"/ho-chi-minh/club",
@@ -16,7 +15,13 @@ export default async function LegacyPostsRedirect({params}:{params:Promise<{slug
   const category=parts[0];
   if(!category || !listingRoutes[category]) return notFound();
   if(parts.length===1) return redirect(listingRoutes[category]);
-  if(category==="notice"||category==="event"||category==="service") return redirect(`/${category}/${encodeURIComponent(parts.at(-1)!)}`);
-  const oldHref=`/posts/${parts.map(encodeURIComponent).join("/")}`;
-  return redirect(canonicalArticleHref(category,oldHref));
+  const lastSlug=decodeRepeatedly(parts.at(-1)!);
+  if(category==="notice"||category==="event"||category==="service") return redirect(`/${category}/${lastSlug}`);
+  return redirect(`${listingRoutes[category]}/${lastSlug}`);
+}
+
+function decodeRepeatedly(value:string){
+  let result=value;
+  for(let index=0;index<3;index+=1){try{const decoded=decodeURIComponent(result);if(decoded===result)break;result=decoded}catch{break}}
+  return result;
 }
