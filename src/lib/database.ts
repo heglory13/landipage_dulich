@@ -1,6 +1,7 @@
 import "server-only";
 
 import { mkdirSync } from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import archivedPosts from "@/data/vietdalbam/posts.json";
@@ -11,12 +12,33 @@ import { noticePosts } from "@/data/notice-posts";
 import { servicePosts } from "@/data/service-posts";
 import { articleSlug, canonicalArticleHref } from "@/lib/content-routes";
 
-const databaseDirectory = path.join(process.cwd(), "data");
-const databasePath = path.join(databaseDirectory, "ho-chi-minh-game.sqlite");
+const databaseFileName = "ho-chi-minh-game.sqlite";
 
-mkdirSync(databaseDirectory, { recursive: true });
+function openDatabase() {
+  const candidateDirectories = [
+    path.join(process.cwd(), "data"),
+    path.join(os.tmpdir(), "landingpage-dulich-data"),
+  ];
 
-export const database = new DatabaseSync(databasePath);
+  let lastError: unknown;
+
+  for (const directory of candidateDirectories) {
+    try {
+      mkdirSync(directory, { recursive: true });
+      const instance = new DatabaseSync(path.join(directory, databaseFileName));
+      if (directory !== candidateDirectories[0]) {
+        console.warn(`[database] Falling back to temporary storage at ${directory}.`);
+      }
+      return instance;
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  throw lastError;
+}
+
+export const database = openDatabase();
 database.exec("PRAGMA busy_timeout = 10000;");
 
 database.exec(`
