@@ -71,7 +71,7 @@ export default function SupportPage() {
         </div>
       </section>
 
-      <section className="px-6 py-20 md:px-12 md:py-28">
+      <section id="inquiry-form" className="scroll-mt-24 px-6 py-20 md:px-12 md:py-28">
         <div className="mx-auto grid max-w-[1500px] gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-16">
           <div className="self-start">
             <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">Send a Request</p>

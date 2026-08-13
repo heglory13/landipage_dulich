@@ -4,7 +4,17 @@ import Link from "next/link";
 import { useState } from "react";
 import { Heart, ShoppingBag } from "lucide-react";
 
-const products = [
+export type FeaturedProduct = {
+  id: number;
+  href: string;
+  name: string;
+  category: string;
+  price: string;
+  image: string;
+  isNew: boolean;
+};
+
+const defaultProducts: FeaturedProduct[] = [
   {
     "id": 1,
     "href": "/ho-chi-minh/massage/%ED%98%B8%EC%B9%98%EB%AF%BC-%EC%B2%B4%EC%98%A8%EC%8A%A4%ED%8C%8C-38-5-c-%EB%A7%88%EC%82%AC%EC%A7%80-cheon-4648",
@@ -178,10 +188,10 @@ const products = [
   }
 ];
 
-const carouselProducts = [...products, ...products];
-
-export function FeaturedProducts() {
+export function FeaturedProducts({ products = defaultProducts }: { products?: FeaturedProduct[] }) {
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
+  const visibleProducts = products.length ? products : defaultProducts;
+  const carouselProducts = [...visibleProducts, ...visibleProducts];
 
   return (
     <section id="selection" className="overflow-hidden py-24 md:py-32">

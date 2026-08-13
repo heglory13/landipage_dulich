@@ -184,6 +184,9 @@ if (!contentColumns.some((column) => column.name === "status")) {
 if (!contentColumns.some((column) => column.name === "author_id")) {
   database.exec("ALTER TABLE content_items ADD COLUMN author_id INTEGER");
 }
+if (!contentColumns.some((column) => column.name === "featured")) {
+  database.exec("ALTER TABLE content_items ADD COLUMN featured INTEGER NOT NULL DEFAULT 0");
+}
 
 type SeedItem = {
   sourceKey: string;

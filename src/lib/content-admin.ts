@@ -1,7 +1,7 @@
 import "server-only";
 import { load } from "cheerio";
 
-export type ContentInput = { title?: unknown; slug?: unknown; category?: unknown; summary?: unknown; image?: unknown; body?: unknown; status?: unknown; mapName?: unknown; mapAddress?: unknown; mapUrl?: unknown; mapEmbedUrl?: unknown };
+export type ContentInput = { title?: unknown; slug?: unknown; category?: unknown; summary?: unknown; image?: unknown; body?: unknown; status?: unknown; featured?: unknown; mapName?: unknown; mapAddress?: unknown; mapUrl?: unknown; mapEmbedUrl?: unknown };
 export const contentStatuses = new Set(["draft", "published"]);
 
 export function normalizeSlug(value: string) {
@@ -16,6 +16,7 @@ export function parseContentInput(input: ContentInput) {
   const image = typeof input.image === "string" ? input.image.trim().slice(0, 500) : "";
   const body = typeof input.body === "string" ? input.body.trim().slice(0, 100_000) : "";
   const status = typeof input.status === "string" && contentStatuses.has(input.status) ? input.status : "draft";
+  const featured = input.featured === true;
   const mapName = typeof input.mapName === "string" ? input.mapName.trim().slice(0, 200) : "";
   const mapAddress = typeof input.mapAddress === "string" ? input.mapAddress.trim().slice(0, 500) : "";
   const mapUrl = typeof input.mapUrl === "string" ? input.mapUrl.trim().slice(0, 2_000) : "";
@@ -23,7 +24,7 @@ export function parseContentInput(input: ContentInput) {
   if (title.length < 2 || title.length > 200 || !slug || body.length < 1) return null;
   if (image && !image.startsWith("/uploads/admin/") && !image.startsWith("/")) return null;
   if ([mapUrl, mapEmbedUrl].some((url) => url && !/^https:\/\/(maps\.app\.goo\.gl\/|(?:www\.)?google\.[^/]+\/maps)/i.test(url))) return null;
-  return { title, slug, category, summary, image, body, status, mapName, mapAddress, mapUrl, mapEmbedUrl };
+  return { title, slug, category, summary, image, body, status, featured, mapName, mapAddress, mapUrl, mapEmbedUrl };
 }
 
 export function fallbackMapForArticle(category: string, slug: string) {

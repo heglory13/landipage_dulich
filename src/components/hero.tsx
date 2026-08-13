@@ -2,6 +2,7 @@
 
 import { ArrowRight, Volume2, VolumeX } from "lucide-react";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export function Hero() {
   const [scrollY, setScrollY] = useState(0);
@@ -113,19 +114,19 @@ export function Hero() {
                 className="flex flex-col sm:flex-row gap-4 pt-4 animate-in fade-in slide-in-from-bottom-4 duration-700"
                 style={{ animationDelay: "1000ms", animationFillMode: "both" }}
               >
-                <button
-                  type="button"
+                <Link
+                  href="/ho-chi-minh/travel"
                   className="group inline-flex items-center justify-center gap-3 bg-white text-[#1a1a1a] px-10 py-5 text-sm tracking-[0.25em] uppercase min-h-12 hover:bg-[#b8a88f] hover:text-[#1a1a1a] transition-all duration-500"
                 >
                   여행지 둘러보기
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
-                </button>
-                <button
-                  type="button"
+                </Link>
+                <Link
+                  href="/support#inquiry-form"
                   className="inline-flex items-center justify-center gap-3 border border-white/30 text-white px-10 py-5 text-sm tracking-[0.25em] uppercase min-h-12 hover:border-white hover:bg-white/10 transition-all duration-500 backdrop-blur-sm"
                 >
                   지금 예매하기
-                </button>
+                </Link>
               </div>
             </div>
 
