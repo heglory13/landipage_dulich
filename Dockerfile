@@ -91,6 +91,10 @@ ENV HOSTNAME="0.0.0.0"
 # Copy production assets
 COPY --from=builder --chown=node:node /app/public ./public
 
+# Create persistent storage directories with permissions for the runtime user.
+RUN mkdir -p /app/data /app/public/uploads /app/public/uploads/admin
+RUN chown -R node:node /app/data /app/public
+
 # Set the correct permission for prerender cache
 RUN mkdir .next
 RUN chown node:node .next
