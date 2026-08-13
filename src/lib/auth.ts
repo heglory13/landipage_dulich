@@ -40,11 +40,12 @@ export async function createSession(userId: number) {
   database.prepare("DELETE FROM sessions WHERE expires_at <= ?").run(new Date().toISOString());
   database.prepare("INSERT INTO sessions (user_id, token_hash, expires_at) VALUES (?, ?, ?)")
     .run(userId, tokenHash(token), expiresAt.toISOString());
+  const secureCookies = process.env.AUTH_COOKIE_SECURE === "true";
 
   (await cookies()).set(sessionCookieName, token, {
     httpOnly: true,
     sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
+    secure: secureCookies,
     path: "/",
     expires: expiresAt,
   });
