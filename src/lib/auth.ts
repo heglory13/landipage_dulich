@@ -7,6 +7,19 @@ import { database, sessionCookieName } from "@/lib/database";
 export type UserRole = "user" | "admin";
 export type PublicUser = { id: number; name: string; email: string; role: UserRole };
 
+export function adminEmails() {
+  return new Set(
+    (process.env.ADMIN_EMAILS ?? "")
+      .split(",")
+      .map((email) => email.trim().toLowerCase())
+      .filter(Boolean),
+  );
+}
+
+export function isAdminEmail(email: string) {
+  return adminEmails().has(email.trim().toLowerCase());
+}
+
 export function hashPassword(password: string, salt = randomBytes(16).toString("hex")) {
   return { salt, hash: scryptSync(password, salt, 64).toString("hex") };
 }

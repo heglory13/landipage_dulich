@@ -1,4 +1,4 @@
-import { createSession, verifyPassword } from "@/lib/auth";
+import { createSession, isAdminEmail, verifyPassword } from "@/lib/auth";
 import { database } from "@/lib/database";
 
 type UserRow = { id: number; name: string; email: string; role: "user" | "admin"; password_hash: string; password_salt: string };
@@ -35,6 +35,10 @@ export async function POST(request: Request) {
   }
 
   attempts.delete(key);
+  const role = isAdminEmail(user.email) ? "admin" : user.role;
+  if (role !== user.role) {
+    database.prepare("UPDATE users SET role = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?").run(role, user.id);
+  }
   await createSession(user.id);
-  return Response.json({ user: { id: user.id, name: user.name, email: user.email, role: user.role } });
+  return Response.json({ user: { id: user.id, name: user.name, email: user.email, role } });
 }

@@ -1,4 +1,4 @@
-import { createSession, hashPassword } from "@/lib/auth";
+import { createSession, hashPassword, isAdminEmail } from "@/lib/auth";
 import { database } from "@/lib/database";
 
 type AuthBody = { name?: string; email?: string; password?: string };
@@ -18,9 +18,10 @@ export async function POST(request: Request) {
   if (existing) return Response.json({ error: "이미 등록된 이메일입니다. 로그인해주세요." }, { status: 409 });
 
   const passwordData = hashPassword(password);
-  const result = database.prepare("INSERT INTO users (name, email, password_hash, password_salt) VALUES (?, ?, ?, ?)")
-    .run(name, email, passwordData.hash, passwordData.salt);
+  const role = isAdminEmail(email) ? "admin" : "user";
+  const result = database.prepare("INSERT INTO users (name, email, password_hash, password_salt, role) VALUES (?, ?, ?, ?, ?)")
+    .run(name, email, passwordData.hash, passwordData.salt, role);
   const id = Number(result.lastInsertRowid);
   await createSession(id);
-  return Response.json({ user: { id, name, email, role: "user" } }, { status: 201 });
+  return Response.json({ user: { id, name, email, role } }, { status: 201 });
 }
