@@ -5,7 +5,15 @@ export type ContentInput = { title?: unknown; slug?: unknown; category?: unknown
 export const contentStatuses = new Set(["draft", "published"]);
 
 export function normalizeSlug(value: string) {
-  return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim().replace(/[^a-z0-9가-힣]+/g, "-").replace(/^-|-$/g, "").slice(0, 120);
+  return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim().replace(/[^a-z0-9\uac00-\ud7a3]+/g, "-").replace(/^-|-$/g, "").slice(0, 120);
+}
+
+export function normalizeImagePath(value: string) {
+  const image = value.trim();
+  if (!image) return "";
+  if (/^https?:\/\//i.test(image) || image.startsWith("/")) return image;
+  if (image.startsWith("uploads/")) return `/${image}`;
+  return image;
 }
 
 export function parseContentInput(input: ContentInput) {
@@ -13,7 +21,7 @@ export function parseContentInput(input: ContentInput) {
   const slug = normalizeSlug(typeof input.slug === "string" ? input.slug : title);
   const category = typeof input.category === "string" ? input.category.trim().slice(0, 80) : "";
   const summary = typeof input.summary === "string" ? input.summary.trim().slice(0, 500) : "";
-  const image = typeof input.image === "string" ? input.image.trim().slice(0, 500) : "";
+  const image = typeof input.image === "string" ? normalizeImagePath(input.image).slice(0, 500) : "";
   const body = typeof input.body === "string" ? input.body.trim().slice(0, 100_000) : "";
   const status = typeof input.status === "string" && contentStatuses.has(input.status) ? input.status : "draft";
   const featured = input.featured === true;
@@ -29,9 +37,9 @@ export function parseContentInput(input: ContentInput) {
 
 export function fallbackMapForArticle(category: string, slug: string) {
   if (category !== "accommodation") return null;
-  if (slug.endsWith("-176") || slug.endsWith("-180")) return { name: "The Landmark plus", address: "QPV9+XP6, Vinhomes Tân Cảng, Bình Thạnh, Hồ Chí Minh", embedUrl: "https://www.google.com/maps?q=The%20Landmark%20plus%2C%2010.7950932%2C106.7220907&z=17&output=embed&hl=en", url: "https://www.google.com/maps/place/The+Landmark+plus/@10.7950932,106.7220907,17z" };
-  if (slug.endsWith("-4342")) return { name: "Sakura Park Quận 7", address: "Đường 16, Tân Phú, Quận 7, Hồ Chí Minh", embedUrl: "https://www.google.com/maps?q=Midtown%20Phu%20My%20Hung%20Sakura%20Park%20District%207&z=17&output=embed&hl=vi", url: "https://www.google.com/maps/search/?api=1&query=Midtown%20Phu%20My%20Hung%20Sakura%20Park" };
-  if (["-1792", "-219", "-218"].some((suffix) => slug.endsWith(suffix))) return { name: "Sunrise City", address: "PPV2+664, Khu đô thị Sunrise City, Tân Hưng, Hồ Chí Minh, Vietnam", embedUrl: "https://www.google.com/maps?q=Sunrise%20City%2C%2010.7430044%2C106.700586&z=15&output=embed&hl=vi", url: "https://www.google.com/maps/search/?api=1&query=Sunrise%20City%20Ho%20Chi%20Minh" };
+  if (slug.endsWith("-176") || slug.endsWith("-180")) return { name: "The Landmark plus", address: "QPV9+XP6, Vinhomes TÃ¢n Cáº£ng, BÃ¬nh Tháº¡nh, Há»“ ChÃ­ Minh", embedUrl: "https://www.google.com/maps?q=The%20Landmark%20plus%2C%2010.7950932%2C106.7220907&z=17&output=embed&hl=en", url: "https://www.google.com/maps/place/The+Landmark+plus/@10.7950932,106.7220907,17z" };
+  if (slug.endsWith("-4342")) return { name: "Sakura Park Quáº­n 7", address: "ÄÆ°á»ng 16, TÃ¢n PhÃº, Quáº­n 7, Há»“ ChÃ­ Minh", embedUrl: "https://www.google.com/maps?q=Midtown%20Phu%20My%20Hung%20Sakura%20Park%20District%207&z=17&output=embed&hl=vi", url: "https://www.google.com/maps/search/?api=1&query=Midtown%20Phu%20My%20Hung%20Sakura%20Park" };
+  if (["-1792", "-219", "-218"].some((suffix) => slug.endsWith(suffix))) return { name: "Sunrise City", address: "PPV2+664, Khu Ä‘Ã´ thá»‹ Sunrise City, TÃ¢n HÆ°ng, Há»“ ChÃ­ Minh, Vietnam", embedUrl: "https://www.google.com/maps?q=Sunrise%20City%2C%2010.7430044%2C106.700586&z=15&output=embed&hl=vi", url: "https://www.google.com/maps/search/?api=1&query=Sunrise%20City%20Ho%20Chi%20Minh" };
   return null;
 }
 
@@ -40,17 +48,17 @@ export function inferMapForArticle(title: string, category: string, html: string
   const iframe = $("iframe[src*='google.'][src*='/maps']").first().attr("src")?.trim() ?? "";
   const googleLink = $("a[href*='maps.app.goo.gl'],a[href*='google.com/maps']").first().attr("href")?.trim() ?? "";
   const text = $.root().text().replace(/\u00a0/g, " ").replace(/\s+/g, " ").trim();
-  const address = (text.match(/(?:주소|위치|địa chỉ|address)\s*[:：]\s*(.{4,220}?)(?=영업시간|운영시간|구글지도|Google Maps|예약|가격|코스|\s{2,}|$)/i)?.[1] ?? "")
-    .replace(/\s*(구글지도바로가기|구글 지도 바로가기|Google Maps?).*$/i, "").replace(/\.{2,}.*$/, "").trim();
-  const region = category.startsWith("danang") ? "Đà Nẵng, Vietnam"
+  const address = (text.match(/(?:ì£¼ì†Œ|ìœ„ì¹˜|Ä‘á»‹a chá»‰|address)\s*[:ï¼š]\s*(.{4,220}?)(?=ì˜ì—…ì‹œê°„|ìš´ì˜ì‹œê°„|êµ¬ê¸€ì§€ë„|Google Maps|ì˜ˆì•½|ê°€ê²©|ì½”ìŠ¤|\s{2,}|$)/i)?.[1] ?? "")
+    .replace(/\s*(êµ¬ê¸€ì§€ë„ë°”ë¡œê°€ê¸°|êµ¬ê¸€ ì§€ë„ ë°”ë¡œê°€ê¸°|Google Maps?).*$/i, "").replace(/\.{2,}.*$/, "").trim();
+  const region = category.startsWith("danang") ? "ÄÃ  Náºµng, Vietnam"
     : category.startsWith("nhatrang") ? "Nha Trang, Vietnam"
-    : category.startsWith("dalat") ? "Đà Lạt, Vietnam"
-    : category === "vungtau" ? "Vũng Tàu, Vietnam"
-    : category === "phuquoc" ? "Phú Quốc, Vietnam"
-    : "Hồ Chí Minh City, Vietnam";
+    : category.startsWith("dalat") ? "ÄÃ  Láº¡t, Vietnam"
+    : category === "vungtau" ? "VÅ©ng TÃ u, Vietnam"
+    : category === "phuquoc" ? "PhÃº Quá»‘c, Vietnam"
+    : "Há»“ ChÃ­ Minh City, Vietnam";
   const name = title
-    .replace(/^\[[^\]]+\]\s*/, "").replace(/^(베트남\s*)?(호치민|다낭|나트랑|달랏|붕따우|푸꾸옥)\s*/i, "")
-    .replace(/\s*(예약 문의 안내|예약 빠르게하는 법|예약 주대 정보|예약방법|예약 방법|시스템 및 예약방법|주대 정보|추천|소개).*$/i, "").trim() || title;
+    .replace(/^\[[^\]]+\]\s*/, "").replace(/^(ë² íŠ¸ë‚¨\s*)?(í˜¸ì¹˜ë¯¼|ë‹¤ë‚­|ë‚˜íŠ¸ëž‘|ë‹¬ëž|ë¶•ë”°ìš°|í‘¸ê¾¸ì˜¥)\s*/i, "")
+    .replace(/\s*(ì˜ˆì•½ ë¬¸ì˜ ì•ˆë‚´|ì˜ˆì•½ ë¹ ë¥´ê²Œí•˜ëŠ” ë²•|ì˜ˆì•½ ì£¼ëŒ€ ì •ë³´|ì˜ˆì•½ë°©ë²•|ì˜ˆì•½ ë°©ë²•|ì‹œìŠ¤í…œ ë° ì˜ˆì•½ë°©ë²•|ì£¼ëŒ€ ì •ë³´|ì¶”ì²œ|ì†Œê°œ).*$/i, "").trim() || title;
   const query = [name, address || region].filter(Boolean).join(", ");
   return {
     name,
@@ -71,6 +79,10 @@ export function sanitizeArticleHtml(html: string) {
       if ((name === "href" || name === "src") && /^\s*(javascript|data):/i.test(value)) node.removeAttr(name);
     }
     const tagName = node.prop("tagName")?.toLowerCase();
+    if (tagName === "img") {
+      const src = node.attr("src");
+      if (src) node.attr("src", normalizeImagePath(src));
+    }
     if (tagName === "iframe") {
       const src = node.attr("src") ?? "";
       const isGoogleEmbed = /^https:\/\/(www\.)?google\.[^/]+\/maps(?:\/embed|\?)/i.test(src) && (/\/maps\/embed/i.test(src) || /[?&]output=embed(?:&|$)/i.test(src));
@@ -84,7 +96,7 @@ export function sanitizeArticleHtml(html: string) {
 
 export function editableBody(payload: Record<string, unknown>) {
   const images = Array.isArray(payload.images) ? payload.images as Array<{ src?: string; alt?: string }> : [];
-  const imageHtml = images.map((image) => image.src ? `<figure class="image"><img src="${image.src}" alt="${image.alt ?? ""}" /></figure>` : "").join("\n");
+  const imageHtml = images.map((image) => image.src ? `<figure class="image"><img src="${normalizeImagePath(image.src)}" alt="${image.alt ?? ""}" /></figure>` : "").join("\n");
   if (typeof payload.html === "string") {
     const html = payload.html;
     const $ = load(html, null, false);
