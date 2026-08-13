@@ -41,6 +41,21 @@ function openDatabase() {
 export const database = openDatabase();
 database.exec("PRAGMA busy_timeout = 10000;");
 
+function isDuplicateColumnError(error: unknown) {
+  return error instanceof Error && /duplicate column name/i.test(error.message);
+}
+
+function ensureColumn(table: string, column: string, definition: string) {
+  const columns = database.prepare(`PRAGMA table_info(${table})`).all() as Array<{ name: string }>;
+  if (columns.some((existingColumn) => existingColumn.name === column)) return;
+
+  try {
+    database.exec(`ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`);
+  } catch (error) {
+    if (!isDuplicateColumnError(error)) throw error;
+  }
+}
+
 database.exec(`
   PRAGMA foreign_keys = ON;
 
@@ -180,10 +195,7 @@ const defaultSettings = {
 const insertSetting = database.prepare("INSERT OR IGNORE INTO site_settings (key, value) VALUES (?, ?)");
 for (const [key, value] of Object.entries(defaultSettings)) insertSetting.run(key, value);
 
-const userColumns = database.prepare("PRAGMA table_info(users)").all() as Array<{ name: string }>;
-if (!userColumns.some((column) => column.name === "role")) {
-  database.exec("ALTER TABLE users ADD COLUMN role TEXT NOT NULL DEFAULT 'user'");
-}
+ensureColumn("users", "role", "TEXT NOT NULL DEFAULT 'user'");
 
 const adminEmails = (process.env.ADMIN_EMAILS ?? "")
   .split(",")
@@ -194,21 +206,10 @@ if (adminEmails.length > 0) {
   for (const email of adminEmails) promoteAdmin.run(email);
 }
 
-const commentColumns = database.prepare("PRAGMA table_info(comments)").all() as Array<{ name: string }>;
-if (!commentColumns.some((column) => column.name === "image_data")) {
-  database.exec("ALTER TABLE comments ADD COLUMN image_data TEXT");
-}
-
-const contentColumns = database.prepare("PRAGMA table_info(content_items)").all() as Array<{ name: string }>;
-if (!contentColumns.some((column) => column.name === "status")) {
-  database.exec("ALTER TABLE content_items ADD COLUMN status TEXT NOT NULL DEFAULT 'published'");
-}
-if (!contentColumns.some((column) => column.name === "author_id")) {
-  database.exec("ALTER TABLE content_items ADD COLUMN author_id INTEGER");
-}
-if (!contentColumns.some((column) => column.name === "featured")) {
-  database.exec("ALTER TABLE content_items ADD COLUMN featured INTEGER NOT NULL DEFAULT 0");
-}
+ensureColumn("comments", "image_data", "TEXT");
+ensureColumn("content_items", "status", "TEXT NOT NULL DEFAULT 'published'");
+ensureColumn("content_items", "author_id", "INTEGER");
+ensureColumn("content_items", "featured", "INTEGER NOT NULL DEFAULT 0");
 
 type SeedItem = {
   sourceKey: string;
