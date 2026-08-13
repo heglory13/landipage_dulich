@@ -10,9 +10,19 @@ export async function requireAdmin() {
 
 export function isSameOrigin(request: Request) {
   const origin = request.headers.get("origin");
-  if (!origin) return false;
+  if (!origin) return true;
   try {
-    return new URL(origin).host === new URL(request.url).host;
+    const originUrl = new URL(origin);
+    const requestUrl = new URL(request.url);
+    const hostCandidates = new Set(
+      [
+        requestUrl.host,
+        request.headers.get("host"),
+        request.headers.get("x-forwarded-host"),
+      ].filter(Boolean) as string[],
+    );
+
+    return hostCandidates.has(originUrl.host);
   } catch {
     return false;
   }
