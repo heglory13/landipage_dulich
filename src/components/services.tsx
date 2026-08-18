@@ -23,8 +23,8 @@ const services = [
   },
   {
     icon: Headphones,
-    title: "달밤 커뮤니티",
-    description: "호치민 달밤의 마사지 게시판 흐름에 맞춘 정보 구성입니다.",
+    title: "호치민 게임 커뮤니티",
+    description: "호치민 호치민 게임의 마사지 게시판 흐름에 맞춘 정보 구성입니다.",
     details: "베트남 자유 여행 정보 커뮤니티",
   },
 ];

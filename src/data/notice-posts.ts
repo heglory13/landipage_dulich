@@ -53,23 +53,23 @@ export const noticePosts: NoticePost[] = [
   },
   {
     slug: "kakao-open-chat-ho-chi-minh-travel-community-241",
-    title: "[카카오 오픈채팅방 바로가기] 베트남 호치민 여행 정보 커뮤니티 <호치민 달밤>",
+    title: "[카카오 오픈채팅방 바로가기] 베트남 호치민 여행 정보 커뮤니티 <호치민 호치민 게임>",
     category: "커뮤니티",
     date: "2024.07.05",
     views: "3234",
     description:
-      "호치민 달밤 회원들과 더 편하게 소통하기 위해 개설된 카카오 단체 오픈채팅방 안내입니다.",
+      "호치민 호치민 게임 회원들과 더 편하게 소통하기 위해 개설된 카카오 단체 오픈채팅방 안내입니다.",
     images: [
       {
         src: "/vietdalbam/upload/e5e9b04d69534a88b01a79edf18ed55e.webp",
-        alt: "[카카오 오픈채팅방 바로가기] 베트남 호치민 여행 정보 커뮤니티 <호치민 달밤>",
+        alt: "[카카오 오픈채팅방 바로가기] 베트남 호치민 여행 정보 커뮤니티 <호치민 호치민 게임>",
       },
     ],
     sourceUrl:
       "https://vietdalbam.com/posts/notice/%EC%B9%B4%EC%B9%B4%EC%98%A4-%EC%98%A4%ED%94%88%EC%B1%84%ED%8C%85%EB%B0%A9-%EB%B0%94%EB%A1%9C%EA%B0%80%EA%B8%B0-%EB%B2%A0%ED%8A%B8%EB%82%A8-%ED%98%B8%EC%B9%98%EB%AF%BC-%EC%97%AC%ED%96%89-241",
     sections: [
       {
-        heading: "안녕하세요. 호치민달밤입니다 :D",
+        heading: "안녕하세요. 호치민호치민 게임입니다 :D",
         body: "회원님들과 더 많은 소통을 하고 싶어 카카오 단체 오픈카톡방을 개설하게 되었습니다.",
       },
       {
@@ -78,7 +78,7 @@ export const noticePosts: NoticePost[] = [
       },
       {
         heading: "오픈채팅방 바로가기",
-        body: "카카오 오픈채팅방을 통해 호치민 달밤 커뮤니티에 참여할 수 있습니다.",
+        body: "카카오 오픈채팅방을 통해 호치민 호치민 게임 커뮤니티에 참여할 수 있습니다.",
       },
     ],
   },

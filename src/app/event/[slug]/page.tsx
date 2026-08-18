@@ -82,11 +82,11 @@ export default async function EventDetailPage({
           <aside className="space-y-5 self-start">
             <div className="bg-primary p-8 text-primary-foreground">
               <p className="text-xs uppercase tracking-[0.35em] text-primary-foreground/55">
-                DALBAM EVENT
+                호치민 게임 EVENT
               </p>
               <h2 className="mt-4 font-serif text-3xl">이벤트</h2>
               <p className="mt-4 text-sm leading-7 text-primary-foreground/65">
-                달밤 이벤트와 프로모션 소식을 모았습니다.
+                호치민 게임 이벤트와 프로모션 소식을 모았습니다.
               </p>
             </div>
             <div className="bg-card p-6 shadow-sm">

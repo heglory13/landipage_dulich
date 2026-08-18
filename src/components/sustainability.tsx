@@ -46,7 +46,7 @@ export function Sustainability() {
             </div>
 
             <p className="text-muted-foreground text-lg leading-relaxed">
-              달밤은 베트남 여행 중 필요한 장소 정보를 도시와 카테고리별로
+              호치민 게임은 베트남 여행 중 필요한 장소 정보를 도시와 카테고리별로
               정리합니다. 숙소, 가라오케, 클럽, 마사지, 맛집까지 실제로
               확인하기 쉬운 목록과 상세 정보를 제공합니다.
             </p>

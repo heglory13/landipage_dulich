@@ -28,12 +28,12 @@ const benefitPages: Record<
   }
 > = {
   notice: {
-    eyebrow: "DALBAM NOTICE",
+    eyebrow: "호치민 게임 NOTICE",
     label: "공지사항",
-    title: "달밤 소식과",
+    title: "호치민 게임 소식과",
     accent: "이용 안내",
     description:
-      "달밤에서 꼭 확인해야 할 업데이트, 이용 방법, 공지 사항을 한곳에 모았습니다.",
+      "호치민 게임에서 꼭 확인해야 할 업데이트, 이용 방법, 공지 사항을 한곳에 모았습니다.",
     posts: noticePosts.map((post) => ({
       title: post.title,
       category: post.category,
@@ -44,12 +44,12 @@ const benefitPages: Record<
     })),
   },
   event: {
-    eyebrow: "DALBAM EVENT",
+    eyebrow: "호치민 게임 EVENT",
     label: "이벤트",
     title: "진행 중인 혜택과",
     accent: "프로모션",
     description:
-      "가라오케, 마사지, 바&주점, 예약 서비스에서 진행되는 달밤 추천 혜택을 확인하세요.",
+      "가라오케, 마사지, 바&주점, 예약 서비스에서 진행되는 호치민 게임 추천 혜택을 확인하세요.",
     posts: eventPosts.map((post) => ({
       title: post.title,
       category: post.category,
@@ -60,7 +60,7 @@ const benefitPages: Record<
     })),
   },
   service: {
-    eyebrow: "DALBAM SERVICE",
+    eyebrow: "호치민 게임 SERVICE",
     label: "서비스",
     title: "여행을 더 편하게",
     accent: "빠르게 연결",
@@ -155,7 +155,7 @@ export function BenefitPage({
                 </h2>
               </div>
               <p className="mt-10 max-w-sm text-sm leading-7 text-primary-foreground/65">
-                달밤의 게시글, 지도, 예약 정보를 더 빠르게 찾을 수 있도록 카테고리별로 정리했습니다.
+                호치민 게임의 게시글, 지도, 예약 정보를 더 빠르게 찾을 수 있도록 카테고리별로 정리했습니다.
               </p>
             </article>
 
@@ -247,7 +247,7 @@ export function BenefitPage({
         <div className="mt-12 grid gap-6 rounded-[32px] bg-card p-8 shadow-sm md:grid-cols-[1fr_auto] md:items-center md:p-10">
           <div>
             <p className="text-xs uppercase tracking-[0.4em] text-muted-foreground">
-              DALBAM GUIDE
+              호치민 게임 GUIDE
             </p>
             <h2 className="mt-3 font-serif text-3xl md:text-4xl">
               인기 게시글도 함께 둘러보세요

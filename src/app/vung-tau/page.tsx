@@ -47,15 +47,15 @@ const recentComments = [
   ["Vũng Tàu", "가격 정보 궁금합니다", "1 giờ trước", "/vung-tau/5룸-붕따우-풀빌라-villa-60-넓은-수영장-240"],
 ] as const;
 const eventItems = [
-  ["2026년 5월 붕따우 달밤 1:1 이벤트", "2026.04.29"],
-  ["2025년 12월 붕따우 달밤 정모 안내", "2025.11.20"],
-  ["2025년 11월 푸꾸옥 달밤 정모 안내", "2025.10.23"],
-  ["2025년 10월 달밤 이벤트", "2025.09.17"],
+  ["2026년 5월 붕따우 호치민 게임 1:1 이벤트", "2026.04.29"],
+  ["2025년 12월 붕따우 호치민 게임 정모 안내", "2025.11.20"],
+  ["2025년 11월 푸꾸옥 호치민 게임 정모 안내", "2025.10.23"],
+  ["2025년 10월 호치민 게임 이벤트", "2025.09.17"],
 ] as const;
 const serviceItems = [
-  ["달밤 호치민 VIP 패스트트랙", "2024.06.28"],
-  ["달밤 다낭 VIP 패스트트랙", "2024.06.29"],
-  ["달밤 나트랑 VIP 패스트트랙", "2024.07.02"],
+  ["호치민 게임 호치민 VIP 패스트트랙", "2024.06.28"],
+  ["호치민 게임 다낭 VIP 패스트트랙", "2024.06.29"],
+  ["호치민 게임 나트랑 VIP 패스트트랙", "2024.07.02"],
 ] as const;
 const weatherLocations = [
   { key: "seoul", name: "Seoul", latitude: 37.5665, longitude: 126.978 },
@@ -135,7 +135,7 @@ export default async function VungTauPage({ searchParams }: { searchParams: Prom
             <div className="grid grid-cols-1 gap-1 overflow-hidden sm:grid-cols-2">{banners.map((banner, index) => <div key={banner} className="aspect-[180/57] overflow-hidden bg-neutral-900"><img src={banner} alt={`붕따우 banner ${index + 1}`} className="h-full w-full object-cover" /></div>)}</div>
             <div className="rounded-2xl bg-card px-6 py-7 shadow-[0_10px_30px_rgba(30,26,20,.06)] md:px-10 md:py-8"><p className="text-xs tracking-[.28em] text-muted-foreground uppercase">Vung Tau · Travel</p><h1 className="mt-3 font-serif text-3xl leading-tight md:text-5xl">Vũng Tàu <span className="cartoon-page-title italic text-accent">붕따우</span></h1></div>
           </div>
-          <div className="hidden h-fit rounded-2xl bg-card p-3 shadow-[0_10px_30px_rgba(30,26,20,.08)] lg:block"><a href="https://t.me/+A3VGGGBdkFllYWE9" target="_blank" rel="noreferrer" className="block aspect-[2268/720] overflow-hidden rounded-t-xl"><img src="/vietdalbam/upload/0e4942bd4a4e4ac699bd991fe4133439.webp" alt="달밤 텔레방" className="h-full w-full object-cover" /></a><a href="https://open.kakao.com/o/gziI3pyh" target="_blank" rel="noreferrer" className="block aspect-[2268/720] overflow-hidden rounded-b-xl"><img src="/vietdalbam/upload/f5d0a13573ff441e95560ae9955acfd7.webp" alt="달밤 단톡방" className="h-full w-full object-cover" /></a></div>
+          <div className="hidden h-fit rounded-2xl bg-card p-3 shadow-[0_10px_30px_rgba(30,26,20,.08)] lg:block"><a href="https://t.me/+A3VGGGBdkFllYWE9" target="_blank" rel="noreferrer" className="block aspect-[2268/720] overflow-hidden rounded-t-xl"><img src="/vietdalbam/upload/0e4942bd4a4e4ac699bd991fe4133439.webp" alt="호치민 게임 텔레방" className="h-full w-full object-cover" /></a><a href="https://open.kakao.com/o/gziI3pyh" target="_blank" rel="noreferrer" className="block aspect-[2268/720] overflow-hidden rounded-b-xl"><img src="/vietdalbam/upload/f5d0a13573ff441e95560ae9955acfd7.webp" alt="호치민 게임 단톡방" className="h-full w-full object-cover" /></a></div>
         </div>
       </div>
     </section>
@@ -161,7 +161,7 @@ export default async function VungTauPage({ searchParams }: { searchParams: Prom
         </div></div>
         <div className="grid min-w-0 grid-cols-2 gap-3 sm:gap-5 xl:grid-cols-3">{visiblePosts.map((post) => <article key={post.href} className="min-w-0 max-w-full overflow-hidden rounded-2xl bg-card shadow-[0_8px_28px_rgba(30,26,20,.06)] md:rounded-none"><Link href={post.href} className="block min-w-0 max-w-full"><div className="aspect-[4/3] w-full max-w-full overflow-hidden bg-secondary">{localImage(post) ? <img src={localImage(post) ?? ""} alt={post.title} className="h-full w-full object-cover transition-transform duration-500 hover:scale-105" /> : null}</div><div className="min-w-0 p-3 md:p-3.5"><div className="hidden items-center gap-1.5 text-xs text-muted-foreground md:flex"><MapPin className="h-3.5 w-3.5 text-accent" />Vũng Tàu</div><h3 className="line-clamp-2 min-h-10 text-[13px] font-medium leading-5 md:mt-2 md:text-sm">{post.title}</h3><div className="mt-2 flex min-w-0 items-center justify-between gap-1 text-[10px] text-muted-foreground md:mt-3 md:border-t md:border-border md:pt-3 md:text-[11px]"><span className="truncate">🎊 호치민 게임</span><span className="shrink-0">{postDate(post.summary)}</span></div></div></Link></article>)}</div>
         <nav className="mt-9 flex justify-center gap-1">{currentPage > 1 ? <Link href={pageHref(currentPage - 1)} className="grid h-10 w-10 place-items-center border border-border bg-card"><ChevronLeft className="h-4 w-4" /></Link> : null}{Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => <Link key={page} href={pageHref(page)} className={`grid h-10 min-w-10 place-items-center border px-3 text-sm ${page === currentPage ? "border-foreground bg-foreground text-background" : "border-border bg-card"}`}>{page}</Link>)}{currentPage < totalPages ? <Link href={pageHref(currentPage + 1)} className="grid h-10 w-10 place-items-center border border-border bg-card"><ChevronRight className="h-4 w-4" /></Link> : null}</nav>
-        <a href="https://open.kakao.com/o/gziI3pyh" target="_blank" rel="noreferrer" className="mt-8 block w-full overflow-hidden bg-[#fff0c9]"><div className="aspect-[2268/720]"><img src="/vietdalbam/upload/31787e8e10004092b8082c77b2b5ddc4.webp" alt="달밤 카카오톡 단톡방" className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.01]" /></div></a>
+        <a href="https://open.kakao.com/o/gziI3pyh" target="_blank" rel="noreferrer" className="mt-8 block w-full overflow-hidden bg-[#fff0c9]"><div className="aspect-[2268/720]"><img src="/vietdalbam/upload/31787e8e10004092b8082c77b2b5ddc4.webp" alt="호치민 게임 카카오톡 단톡방" className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.01]" /></div></a>
       </div>
     </div></section>
     <Footer />

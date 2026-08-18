@@ -102,11 +102,11 @@ export default async function NoticeDetailPage({
           <aside className="space-y-5 self-start">
             <div className="bg-primary p-8 text-primary-foreground">
               <p className="text-xs uppercase tracking-[0.35em] text-primary-foreground/55">
-                DALBAM NOTICE
+                호치민 게임 NOTICE
               </p>
               <h2 className="mt-4 font-serif text-3xl">공지사항</h2>
               <p className="mt-4 text-sm leading-7 text-primary-foreground/65">
-                달밤 이용 전 확인하면 좋은 공지와 커뮤니티 안내를 모았습니다.
+                호치민 게임 이용 전 확인하면 좋은 공지와 커뮤니티 안내를 모았습니다.
               </p>
             </div>
             <div className="bg-card p-6 shadow-sm">

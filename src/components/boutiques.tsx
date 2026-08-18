@@ -14,10 +14,10 @@ export function Boutiques() {
             Notice Board
           </p>
           <h2 className="cartoon-section-title font-serif text-4xl md:text-5xl lg:text-6xl tracking-tight mb-6">
-            달밤 <span className="italic text-accent">공지사항</span>
+            호치민 게임 <span className="italic text-accent">공지사항</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            달밤 이용에 필요한 최신 안내와 중요한 소식을 확인하세요.
+            호치민 게임 이용에 필요한 최신 안내와 중요한 소식을 확인하세요.
           </p>
         </div>
 

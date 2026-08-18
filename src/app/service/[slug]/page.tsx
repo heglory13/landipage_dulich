@@ -89,7 +89,7 @@ export default async function ServiceDetailPage({
           <aside className="space-y-5 self-start">
             <div className="bg-primary p-8 text-primary-foreground">
               <p className="text-xs uppercase tracking-[0.35em] text-primary-foreground/55">
-                DALBAM SERVICE
+                호치민 게임 SERVICE
               </p>
               <h2 className="mt-4 font-serif text-3xl">서비스</h2>
               <p className="mt-4 text-sm leading-7 text-primary-foreground/65">

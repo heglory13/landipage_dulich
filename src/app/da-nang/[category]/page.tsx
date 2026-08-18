@@ -73,18 +73,18 @@ const recentComments = [
   ["Đà Nẵng Villa", "객실 문의드립니다", "3 giờ trước", "/da-nang/accommodation/d-5-베트남-다낭-풀빌라-5룸-2712"],
 ] as const;
 const eventItems = [
-  ["2026년 5월 다낭 달밤 1:1 이벤트", "2026.04.29"],
-  ["2025년 12월 다낭 달밤 정모 안내", "2025.11.20"],
-  ["2025년 11월 다낭 달밤 정모 안내", "2025.10.23"],
-  ["2025년 10월 다낭 달밤 이벤트", "2025.09.17"],
-  ["2025년 9월 달밤 정모 안내", "2025.08.22"],
-  ["[달밤 궁상] 다낭 프라이빗 파티", "2025.04.16"],
+  ["2026년 5월 다낭 호치민 게임 1:1 이벤트", "2026.04.29"],
+  ["2025년 12월 다낭 호치민 게임 정모 안내", "2025.11.20"],
+  ["2025년 11월 다낭 호치민 게임 정모 안내", "2025.10.23"],
+  ["2025년 10월 다낭 호치민 게임 이벤트", "2025.09.17"],
+  ["2025년 9월 호치민 게임 정모 안내", "2025.08.22"],
+  ["[호치민 게임 궁상] 다낭 프라이빗 파티", "2025.04.16"],
 ] as const;
 const serviceItems = [
-  ["달밤 다낭 VIP 패스트트랙", "2024.06.29"],
-  ["달밤 호치민 VIP 패스트트랙", "2024.06.28"],
-  ["달밤 나트랑 VIP 패스트트랙", "2024.07.02"],
-  ["달밤 하노이 VIP 패스트트랙", "2024.08.07"],
+  ["호치민 게임 다낭 VIP 패스트트랙", "2024.06.29"],
+  ["호치민 게임 호치민 VIP 패스트트랙", "2024.06.28"],
+  ["호치민 게임 나트랑 VIP 패스트트랙", "2024.07.02"],
+  ["호치민 게임 하노이 VIP 패스트트랙", "2024.08.07"],
 ] as const;
 const daNangWeatherLocations = [
   { key: "seoul", name: "Seoul", latitude: 37.5665, longitude: 126.978 },
@@ -211,8 +211,8 @@ export default async function DaNangCategoryPage({
             </div>
           </div>
           <div className="hidden h-fit rounded-2xl bg-card p-3 shadow-[0_10px_30px_rgba(30,26,20,.08)] lg:block">
-            <a href="https://t.me/+A3VGGGBdkFllYWE9" target="_blank" rel="noreferrer" className="block aspect-[2268/720] overflow-hidden rounded-t-xl"><img src="/vietdalbam/upload/0e4942bd4a4e4ac699bd991fe4133439.webp" alt="달밤 텔레방" className="h-full w-full object-cover" /></a>
-            <a href="https://open.kakao.com/o/gziI3pyh" target="_blank" rel="noreferrer" className="block aspect-[2268/720] overflow-hidden rounded-b-xl"><img src="/vietdalbam/upload/f5d0a13573ff441e95560ae9955acfd7.webp" alt="달밤 단톡방" className="h-full w-full object-cover" /></a>
+            <a href="https://t.me/+A3VGGGBdkFllYWE9" target="_blank" rel="noreferrer" className="block aspect-[2268/720] overflow-hidden rounded-t-xl"><img src="/vietdalbam/upload/0e4942bd4a4e4ac699bd991fe4133439.webp" alt="호치민 게임 텔레방" className="h-full w-full object-cover" /></a>
+            <a href="https://open.kakao.com/o/gziI3pyh" target="_blank" rel="noreferrer" className="block aspect-[2268/720] overflow-hidden rounded-b-xl"><img src="/vietdalbam/upload/f5d0a13573ff441e95560ae9955acfd7.webp" alt="호치민 게임 단톡방" className="h-full w-full object-cover" /></a>
           </div>
         </div>
       </div>
@@ -258,7 +258,7 @@ export default async function DaNangCategoryPage({
           </nav>
           <a href="https://open.kakao.com/o/gziI3pyh" target="_blank" rel="noreferrer" className="mt-8 block w-full overflow-hidden bg-[#fff0c9]">
             <div className="aspect-[2268/720]">
-              <img src="/vietdalbam/upload/31787e8e10004092b8082c77b2b5ddc4.webp" alt="달밤 카카오톡 단톡방" className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.01]" />
+              <img src="/vietdalbam/upload/31787e8e10004092b8082c77b2b5ddc4.webp" alt="호치민 게임 카카오톡 단톡방" className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.01]" />
             </div>
           </a>
         </div>

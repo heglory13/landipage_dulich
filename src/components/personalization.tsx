@@ -19,7 +19,7 @@ export function Personalization() {
             <span className="italic text-accent"> 마사지 글</span>
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed">
-            호치민 달밤 마사지 게시판의 이미지와 제목을 기준으로
+            호치민 호치민 게임 마사지 게시판의 이미지와 제목을 기준으로
             각 카드의 내용이 함께 표시됩니다.
           </p>
         </div>

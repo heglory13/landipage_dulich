@@ -181,17 +181,17 @@ const recentPosts = [
 ] as const;
 
 const eventItems = [
-  { title: "2026년 5월 호치민 달밤 1:1 이벤트", date: "2026.04.29" },
-  { title: "2025년 12월 호치민 달밤 정모 안내", date: "2025.11.20" },
-  { title: "2025년 11월 호치민 달밤 정모 안내", date: "2025.10.23" },
-  { title: "2025년 10월 달밤 이벤트", date: "2025.09.17" },
+  { title: "2026년 5월 호치민 호치민 게임 1:1 이벤트", date: "2026.04.29" },
+  { title: "2025년 12월 호치민 호치민 게임 정모 안내", date: "2025.11.20" },
+  { title: "2025년 11월 호치민 호치민 게임 정모 안내", date: "2025.10.23" },
+  { title: "2025년 10월 호치민 게임 이벤트", date: "2025.09.17" },
 ] as const;
 
 const serviceItems = [
-  { title: "달밤 호치민 VIP 패스트트랙", date: "2024.06.28" },
-  { title: "달밤 나트랑 VIP 패스트트랙", date: "2024.07.02" },
-  { title: "달밤 하노이 VIP 패스트트랙", date: "2024.08.07" },
-  { title: "달밤 다낭 VIP 패스트트랙", date: "2024.06.29" },
+  { title: "호치민 게임 호치민 VIP 패스트트랙", date: "2024.06.28" },
+  { title: "호치민 게임 나트랑 VIP 패스트트랙", date: "2024.07.02" },
+  { title: "호치민 게임 하노이 VIP 패스트트랙", date: "2024.08.07" },
+  { title: "호치민 게임 다낭 VIP 패스트트랙", date: "2024.06.29" },
 ] as const;
 
 const stayDates = [
@@ -305,10 +305,10 @@ export default async function AccommodationPage({
               <div className="rounded-2xl bg-card p-3 shadow-[0_10px_30px_rgba(30,26,20,0.08)]">
                 <div className="overflow-hidden rounded-xl">
                   <a href="https://t.me/+A3VGGGBdkFllYWE9" target="_blank" rel="noreferrer" className="block aspect-[2268/720] overflow-hidden">
-                    <img src="/vietdalbam/upload/0e4942bd4a4e4ac699bd991fe4133439.webp" alt="달밤 텔레방" className="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.01]" />
+                    <img src="/vietdalbam/upload/0e4942bd4a4e4ac699bd991fe4133439.webp" alt="호치민 게임 텔레방" className="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.01]" />
                   </a>
                   <a href="https://open.kakao.com/o/gziI3pyh" target="_blank" rel="noreferrer" className="block aspect-[2268/720] overflow-hidden">
-                    <img src="/vietdalbam/upload/f5d0a13573ff441e95560ae9955acfd7.webp" alt="달밤 단톡방" className="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.01]" />
+                    <img src="/vietdalbam/upload/f5d0a13573ff441e95560ae9955acfd7.webp" alt="호치민 게임 단톡방" className="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.01]" />
                   </a>
                 </div>
               </div>
@@ -467,7 +467,7 @@ export default async function AccommodationPage({
                         {stay.title}
                       </h3>
                       <div className="mt-2 flex min-w-0 items-center justify-between gap-1 text-[10px] text-muted-foreground md:mt-3 md:border-t md:border-border md:pt-3 md:text-[11px]">
-                        <span className="truncate">🎊 달밤</span>
+                        <span className="truncate">🎊 호치민 게임</span>
                         <span className="shrink-0">{stay.date}</span>
                       </div>
                     </div>
@@ -526,7 +526,7 @@ export default async function AccommodationPage({
               <div className="aspect-[2268/720] w-full overflow-hidden">
                 <img
                   src="/vietdalbam/upload/31787e8e10004092b8082c77b2b5ddc4.webp"
-                  alt="달밤 카카오톡 단톡방"
+                  alt="호치민 게임 카카오톡 단톡방"
                   className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.01]"
                 />
               </div>
@@ -539,10 +539,10 @@ export default async function AccommodationPage({
         <div className="mx-auto max-w-[340px] rounded-2xl bg-card p-3 shadow-[0_10px_30px_rgba(30,26,20,0.08)]">
           <div className="overflow-hidden rounded-xl">
             <a href="https://t.me/+A3VGGGBdkFllYWE9" target="_blank" rel="noreferrer" className="block aspect-[2268/720] overflow-hidden">
-              <img src="/vietdalbam/upload/0e4942bd4a4e4ac699bd991fe4133439.webp" alt="달밤 텔레방" className="h-full w-full object-cover" />
+              <img src="/vietdalbam/upload/0e4942bd4a4e4ac699bd991fe4133439.webp" alt="호치민 게임 텔레방" className="h-full w-full object-cover" />
             </a>
             <a href="https://open.kakao.com/o/gziI3pyh" target="_blank" rel="noreferrer" className="block aspect-[2268/720] overflow-hidden">
-              <img src="/vietdalbam/upload/f5d0a13573ff441e95560ae9955acfd7.webp" alt="달밤 단톡방" className="h-full w-full object-cover" />
+              <img src="/vietdalbam/upload/f5d0a13573ff441e95560ae9955acfd7.webp" alt="호치민 게임 단톡방" className="h-full w-full object-cover" />
             </a>
           </div>
         </div>

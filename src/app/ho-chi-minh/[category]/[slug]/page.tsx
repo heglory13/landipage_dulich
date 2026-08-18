@@ -400,7 +400,7 @@ export default async function HoChiMinhDetailPage({ params }: { params: Promise<
           <header className="mb-11 border-b border-border pb-6">
             <Link href={`/ho-chi-minh/${rawCategory}`} className="text-xs text-muted-foreground">{category.label}</Link>
             <h1 className="mt-3 font-sans text-[20px] font-bold leading-8">{post.title}</h1>
-            <div className="mt-4 text-xs text-muted-foreground">🎊 달밤 · {postDate(post)}</div>
+            <div className="mt-4 text-xs text-muted-foreground">🎊 호치민 게임 · {postDate(post)}</div>
           </header>
           <div className="mb-6 flex flex-wrap items-center gap-2"><span className="bg-[#b5b9c1] px-1.5 py-1 text-xs text-white">{category.label}</span><h2 className="font-sans text-[20px] font-bold leading-8">{post.title}</h2></div>
           <div className="mb-6 border-t border-border" />
@@ -409,7 +409,7 @@ export default async function HoChiMinhDetailPage({ params }: { params: Promise<
           <ArticleInteractions contentKey={`ho-chi-minh:${rawCategory}:${decodeURIComponent(slug)}`} />
         </article>
         <aside className="min-w-0 space-y-5 self-start">
-          <div className="rounded-2xl bg-card p-3 shadow-[0_10px_30px_rgba(30,26,20,.08)]"><a href="https://t.me/+A3VGGGBdkFllYWE9" target="_blank" rel="noreferrer" className="block aspect-[2268/720] overflow-hidden rounded-t-xl"><img src="/vietdalbam/upload/0e4942bd4a4e4ac699bd991fe4133439.webp" alt="달밤 텔레방" className="h-full w-full object-cover"/></a><a href="https://open.kakao.com/o/gziI3pyh" target="_blank" rel="noreferrer" className="block aspect-[2268/720] overflow-hidden rounded-b-xl"><img src="/vietdalbam/upload/f5d0a13573ff441e95560ae9955acfd7.webp" alt="달밤 단톡방" className="h-full w-full object-cover"/></a></div>
+          <div className="rounded-2xl bg-card p-3 shadow-[0_10px_30px_rgba(30,26,20,.08)]"><a href="https://t.me/+A3VGGGBdkFllYWE9" target="_blank" rel="noreferrer" className="block aspect-[2268/720] overflow-hidden rounded-t-xl"><img src="/vietdalbam/upload/0e4942bd4a4e4ac699bd991fe4133439.webp" alt="호치민 게임 텔레방" className="h-full w-full object-cover"/></a><a href="https://open.kakao.com/o/gziI3pyh" target="_blank" rel="noreferrer" className="block aspect-[2268/720] overflow-hidden rounded-b-xl"><img src="/vietdalbam/upload/f5d0a13573ff441e95560ae9955acfd7.webp" alt="호치민 게임 단톡방" className="h-full w-full object-cover"/></a></div>
           <section className="bg-card p-6 shadow-[0_8px_25px_rgba(30,26,20,.05)]"><p className="text-[10px] tracking-[.25em] text-muted-foreground uppercase">Related posts</p><h2 className="mt-2 font-serif text-2xl">추천 글</h2><div className="mt-5 space-y-5">{related.map((item) => { const image = archiveImage(rawCategory, item); return <Link key={item.href} href={`/ho-chi-minh/${rawCategory}/${postSlug(item)}`} className="group grid grid-cols-[92px_1fr] gap-3 border-b border-border pb-5 last:border-0 last:pb-0"><div className="aspect-[4/3] overflow-hidden bg-secondary">{image ? <img src={image} alt="" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"/> : null}</div><div className="min-w-0"><p className="line-clamp-2 text-sm font-medium leading-5 group-hover:text-accent">{item.title}</p><p className="mt-2 text-[10px] text-muted-foreground">{postDate(item)}</p></div></Link>})}</div></section>
           <LiveTravelWidgets />
         </aside>

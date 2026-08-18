@@ -100,7 +100,7 @@ const destinationGroups = [
 const benefitItems = [
   {
     title: "공지사항",
-    description: "달밤의 새로운 소식과 꼭 확인해야 할 이용 안내",
+    description: "호치민 게임의 새로운 소식과 꼭 확인해야 할 이용 안내",
     href: "/notice",
   },
   {
